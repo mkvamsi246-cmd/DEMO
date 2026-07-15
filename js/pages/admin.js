@@ -166,7 +166,8 @@ const AdminPage = {
     if (!name) { Helpers.toast('Please enter volunteer name', 'error'); return; }
     if (!districtId) { Helpers.toast('Please select district', 'error'); return; }
     if (!code || code.length < 6) { Helpers.toast('Access code must be at least 6 characters', 'error'); return; }
-    if (code === 'ADMIN2024') { Helpers.toast('Cannot use reserved admin code', 'error'); return; }
+    const reservedCodes = ['ADMIN2024', 'ADMIN246', 'VOLUNTEER246'];
+    if (reservedCodes.includes(code)) { Helpers.toast('Cannot use reserved system code', 'error'); return; }
 
     const volunteers = JSON.parse(localStorage.getItem('dss_volunteers') || '[]');
     const exists = volunteers.find(v => v.code === code);

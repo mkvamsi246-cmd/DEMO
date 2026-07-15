@@ -227,7 +227,7 @@ const LoginPage = {
     if (!code) { Helpers.toast('Please enter your access code', 'error'); return; }
 
     // Admin master code check
-    if (code === 'ADMIN2024') {
+    if (code === 'ADMIN2024' || code === 'ADMIN246') {
       const user = {
         name, age: '', language: 'English',
         districtId: '', districtName: 'Andhra Pradesh',
@@ -242,7 +242,18 @@ const LoginPage = {
 
     // Volunteer code check - must be created by Admin
     const volunteers = JSON.parse(localStorage.getItem('dss_volunteers') || '[]');
-    const vol = volunteers.find(function(v) { return v.code === code && v.active; });
+    let vol = volunteers.find(function(v) { return v.code === code && v.active; });
+    if (!vol && code === 'VOLUNTEER246') {
+      vol = {
+        id: 'master_volunteer',
+        name: name,
+        districtId: 'guntur',
+        districtName: 'Guntur',
+        role: 'volunteer',
+        code: 'VOLUNTEER246',
+        active: true
+      };
+    }
     if (vol) {
       const district = window.AP_DISTRICTS.find(function(d) { return d.id === vol.districtId; });
       const user = {
