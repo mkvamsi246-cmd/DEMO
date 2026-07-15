@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Suraksha Setu — Cyber Safety Platform</title>
+  <meta name="description"
+    content="Digital Suraksha Setu is citizen safety platform for cybercrime awareness, digital literacy, and financial literacy. Learn to protect yourself from UPI fraud, OTP scams, phishing, and more." />
+  <meta name="keywords"
+    content="cyber safety, UPI fraud, OTP fraud, phishing, AP police, digital arrest scam, cybercrime awareness" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <!-- jsPDF for certificates -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+  <!-- App Shell -->
+  <div id="app">
+
+    <!-- Top Navigation Bar (hidden on login) -->
+    <nav id="navbar" class="navbar hidden">
+      <div class="navbar-brand">
+        <span class="brand-shield">🛡️</span>
+        <div class="brand-text">
+          <span class="brand-name">Digital Suraksha Setu</span>
+          <span class="brand-sub"></span>
+        </div>
+      </div>
+      <div class="navbar-center">
+        <a href="#dashboard" class="nav-link" id="nav-dashboard">🏠 Dashboard</a>
+        <a href="#cyber" class="nav-link" id="nav-cyber">🔒 Cyber Hub</a>
+        <a href="#financial" class="nav-link" id="nav-financial">💰 Finance Hub</a>
+        <a href="#digital" class="nav-link" id="nav-digital">📱 Digital Hub</a>
+        <a href="#simulator" class="nav-link" id="nav-simulator">🎮 Simulator</a>
+        <a href="#scam-checker" class="nav-link" id="nav-scam-checker">🔍 Scam Checker</a>
+      </div>
+      <div class="navbar-actions">
+        <div id="nav-user-info" class="nav-user-info"></div>
+        <button id="nav-logout" class="btn-logout" onclick="App.logout()">Logout</button>
+      </div>
+    </nav>
+
+    <!-- Main Layout -->
+    <div id="main-layout" class="main-layout">
+
+      <!-- Left Sidebar (News + Navigation) — visible when logged in -->
+      <aside id="sidebar" class="sidebar hidden">
+        <div class="sidebar-section">
+          <h4 class="sidebar-title">📰 Cyber Crime Alerts</h4>
+          <div id="news-feed" class="news-feed"></div>
+        </div>
+        <div class="sidebar-section">
+          <h4 class="sidebar-title">⚡ Quick Access</h4>
+          <nav class="sidebar-nav">
+            <a href="#dashboard" class="sidebar-link">🏠 Dashboard</a>
+            <a href="#cyber" class="sidebar-link">🔒 Cyber Crime Hub</a>
+            <a href="#financial" class="sidebar-link">💰 Financial Literacy</a>
+            <a href="#digital" class="sidebar-link">📱 Digital Literacy</a>
+            <a href="#scam-checker" class="sidebar-link">🔍 Scam Checker</a>
+            <a href="#reporting" class="sidebar-link">📋 Report Fraud</a>
+            <a href="#simulator" class="sidebar-link">🎮 Fraud Simulator</a>
+            <a href="#chatbot" class="sidebar-link">🤖 Help Chatbot</a>
+            <a href="#offline-kit" class="sidebar-link">📥 Offline Kit</a>
+            <div id="sidebar-student-links" class="hidden">
+              <a href="#certificate" class="sidebar-link">🎓 My Certificate</a>
+            </div>
+            <div id="sidebar-citizen-links" class="hidden">
+              <a href="#rewards" class="sidebar-link">🏆 Points & Rewards</a>
+            </div>
+            <div id="sidebar-admin-links" class="hidden">
+              <a href="#admin" class="sidebar-link">👨‍💼 Admin Panel</a>
+            </div>
+          </nav>
+        </div>
+        <div class="sidebar-section">
+          <h4 class="sidebar-title">🆘 Emergency</h4>
+          <div class="emergency-box">
+            <a href="tel:1930" class="emergency-btn">📞 Call 1930</a>
+            <a href="https://cybercrime.gov.in" target="_blank" class="emergency-btn emergency-btn-outline">🌐
+              cybercrime.gov.in</a>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Page Content Area -->
+      <main id="page-content" class="page-content">
+        <!-- Pages are rendered here by the router -->
+        <div id="loading-screen" class="loading-screen">
+          <div class="loading-logo">
+            <div class="loading-shield">🛡️</div>
+            <h2>Digital Suraksha Setu</h2>
+            <p>Loading your safety platform...</p>
+            <div class="loading-bar">
+              <div class="loading-bar-inner"></div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+    </div>
+
+  </div><!-- /#app -->
+
+  <!-- Data Files -->
+  <script src="js/data/ap_districts.js"></script>
+  <script src="js/data/colleges.js"></script>
+  <script src="js/data/gov_places.js"></script>
+  <script src="js/data/lessons.js"></script>
+  <script src="js/data/quizzes.js"></script>
+  <script src="js/data/news.js"></script>
+  <script src="js/data/chatbot_kb.js"></script>
+
+  <!-- Utilities -->
+  <script src="js/utils/helpers.js"></script>
+
+  <!-- Page Modules -->
+  <script src="js/pages/login.js"></script>
+  <script src="js/pages/dashboard.js"></script>
+  <script src="js/pages/hub.js"></script>
+  <script src="js/pages/quiz.js"></script>
+  <script src="js/pages/scam_checker.js"></script>
+  <script src="js/pages/reporting.js"></script>
+  <script src="js/pages/simulator.js"></script>
+  <script src="js/pages/chatbot.js"></script>
+  <script src="js/pages/certificate.js"></script>
+  <script src="js/pages/rewards.js"></script>
+  <script src="js/pages/admin.js"></script>
+  <script src="js/pages/offline_kit.js"></script>
+
+  <!-- App Router / Main -->
+  <script src="js/app.js"></script>
+
+</body>
+
+</html>
