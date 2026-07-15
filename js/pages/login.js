@@ -221,7 +221,7 @@ const LoginPage = {
   // Staff login: Admin uses ADMIN2024; Volunteers use code issued by Admin
   doAdminLogin() {
     const name = document.getElementById('f-admin-name').value.trim();
-    const code = document.getElementById('f-admin-code').value.trim();
+    const code = document.getElementById('f-admin-code').value.trim().toUpperCase();
 
     if (!name) { Helpers.toast('Please enter your name', 'error'); return; }
     if (!code) { Helpers.toast('Please enter your access code', 'error'); return; }
