@@ -89,7 +89,7 @@ const OfflineKitPage = {
       doc.setTextColor(245, 158, 11);
       doc.setFontSize(18);
       doc.setFont('helvetica', 'bold');
-      doc.text('Digital Suraksha Setu', 105, 30, { align: 'center' });
+      doc.text('Secure Future', 105, 30, { align: 'center' });
 
       doc.setTextColor(255, 255, 255);
       doc.setFontSize(14);
@@ -106,7 +106,7 @@ const OfflineKitPage = {
       doc.setFontSize(11);
       doc.setTextColor(150, 175, 200);
       doc.text([
-        'This document is part of the Digital Suraksha Setu Offline Awareness Kit.',
+        'This document is part of the Secure Future Offline Awareness Kit.',
         '',
         'Intended for distribution in:',
         '• Gram Panchayat offices',
@@ -124,7 +124,7 @@ const OfflineKitPage = {
 
       doc.setTextColor(70, 90, 110);
       doc.setFontSize(9);
-      doc.text('Digital Suraksha Setu | Government of Andhra Pradesh | cybercrime.gov.in | 1930', 105, 280, { align: 'center' });
+      doc.text('Secure Future | Government of Andhra Pradesh | cybercrime.gov.in | 1930', 105, 280, { align: 'center' });
 
       doc.save(`DSS_${file}.pdf`);
       Helpers.toast('✅ Document downloaded!', 'success');

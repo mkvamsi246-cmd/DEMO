@@ -27,7 +27,7 @@ const CertificatePage = {
       <div class="certificate-page">
         <div class="page-header">
           <h1>🎓 My Certificate</h1>
-          <p>Complete the required modules and quizzes to earn your Digital Suraksha Setu certificate.</p>
+          <p>Complete the required modules and quizzes to earn your Secure Future certificate.</p>
         </div>
 
         <!-- Eligibility Progress -->
@@ -66,13 +66,13 @@ const CertificatePage = {
           <div class="certificate-preview" id="cert-preview">
             <div class="cert-seal">🛡️</div>
             <div class="cert-title">Certificate of Completion</div>
-            <div style="font-size:0.75rem; color:rgba(245,158,11,0.7); letter-spacing:2px; margin-bottom:16px;">DIGITAL SURAKSHA SETU — ANDHRA PRADESH</div>
+            <div style="font-size:0.75rem; color:rgba(245,158,11,0.7); letter-spacing:2px; margin-bottom:16px;">SECURE FUTURE — ANDHRA PRADESH</div>
 
             <p style="font-size:0.85rem; color:rgba(255,255,255,0.6); margin-bottom:8px;">This is to certify that</p>
             <div class="cert-name" id="cert-name-display">${user.name}</div>
 
             <p class="cert-body">
-              has successfully completed the <strong>Digital Suraksha Setu Awareness Programme</strong>,
+              has successfully completed the <strong>Secure Future Awareness Programme</strong>,
               demonstrating knowledge in Cyber Crime Prevention, Financial Literacy, and Digital Safety —
               as part of the Andhra Pradesh Cyber Safety Initiative.
             </p>
@@ -164,7 +164,7 @@ const CertificatePage = {
       doc.setTextColor(245, 158, 11);
       doc.setFontSize(10);
       doc.setFont('helvetica', 'bold');
-      doc.text('DIGITAL SURAKSHA SETU — ANDHRA PRADESH', pageW/2, 30, { align: 'center' });
+      doc.text('SECURE FUTURE — ANDHRA PRADESH', pageW/2, 30, { align: 'center' });
 
       doc.setFontSize(22);
       doc.text('Certificate of Completion', pageW/2, 45, { align: 'center' });
@@ -191,7 +191,7 @@ const CertificatePage = {
       doc.setTextColor(150, 175, 200);
       doc.setFontSize(10);
       doc.setFont('helvetica', 'normal');
-      const bodyText = 'has successfully completed the Digital Suraksha Setu Awareness Programme, demonstrating knowledge in';
+      const bodyText = 'has successfully completed the Secure Future Awareness Programme, demonstrating knowledge in';
       const bodyText2 = 'Cyber Crime Prevention, Financial Literacy, and Digital Safety — Andhra Pradesh Cyber Safety Initiative.';
       doc.text(bodyText, pageW/2, 92, { align: 'center' });
       doc.text(bodyText2, pageW/2, 99, { align: 'center' });

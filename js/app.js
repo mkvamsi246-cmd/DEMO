@@ -63,7 +63,7 @@ const App = {
     this.updateNav(hash);
     this.updateSidebar(user);
     this.updateNavUser(user);
-    document.title = `${route.title} — Digital Suraksha Setu`;
+    document.title = `${route.title} — Secure Future`;
   },
 
   navigate(route) {
@@ -76,7 +76,7 @@ const App = {
     content.classList.remove('with-sidebar');
     content.innerHTML = LoginPage.render();
     LoginPage.init();
-    document.title = 'Digital Suraksha Setu — Login';
+    document.title = 'Secure Future — Login';
   },
 
   renderPage(hash, route) {
