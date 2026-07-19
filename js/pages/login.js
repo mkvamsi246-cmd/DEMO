@@ -212,6 +212,8 @@ const LoginPage = {
     document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
     document.getElementById('cat-' + cat).classList.add('active');
     document.getElementById('login-form-area').classList.remove('hidden');
+    document.getElementById('student-fields').classList.toggle('hidden', cat !== 'student');
+    document.getElementById('citizen-fields').classList.toggle('hidden', cat !== 'citizen');
   },
 
   toggleAdminCode() {
