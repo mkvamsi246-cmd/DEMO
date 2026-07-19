@@ -109,16 +109,16 @@ const LoginPage = {
                     <div id="student-fields" class="hidden">
                       <div class="form-group">
                         <label class="form-label">College / Institution</label>
-                        <select id="f-college" class="form-select">
-                          <option value="">Select College</option>
+                        <select id="f-college" class="form-select" disabled>
+                          <option value="">Select District First</option>
                         </select>
                       </div>
                     </div>
                     <div id="citizen-fields" class="hidden">
                       <div class="form-group">
                         <label class="form-label">Place Type</label>
-                        <select id="f-place-type" class="form-select" onchange="LoginPage.onPlaceTypeChange()">
-                          <option value="">Select Place Type</option>
+                        <select id="f-place-type" class="form-select" onchange="LoginPage.onPlaceTypeChange()" disabled>
+                          <option value="">Select District First</option>
                           <option value="panchayat">Gram Panchayat</option>
                           <option value="police">Police Station</option>
                           <option value="bank">Bank Branch</option>
@@ -128,8 +128,8 @@ const LoginPage = {
                       </div>
                       <div class="form-group">
                         <label class="form-label">Nearby Place</label>
-                        <select id="f-place" class="form-select">
-                          <option value="">Select Place</option>
+                        <select id="f-place" class="form-select" disabled>
+                          <option value="">Select Place Type First</option>
                         </select>
                       </div>
                     </div>
@@ -246,9 +246,29 @@ const LoginPage = {
 
   onDistrictChange() {
     const districtId = document.getElementById('f-district').value;
-    if (!districtId) return;
     const collegeSel = document.getElementById('f-college');
+    const placeTypeSel = document.getElementById('f-place-type');
+    const placeSel = document.getElementById('f-place');
+
+    if (!districtId) {
+      if (collegeSel) {
+        collegeSel.innerHTML = '<option value="">Select District First</option>';
+        collegeSel.disabled = true;
+      }
+      if (placeTypeSel) {
+        placeTypeSel.disabled = true;
+        placeTypeSel.value = '';
+      }
+      if (placeSel) {
+        placeSel.innerHTML = '<option value="">Select Place Type First</option>';
+        placeSel.disabled = true;
+      }
+      return;
+    }
+    
+    // District is selected
     if (collegeSel && window.AP_COLLEGES) {
+      collegeSel.disabled = false;
       collegeSel.innerHTML = '<option value="">Select College</option>';
       (window.AP_COLLEGES[districtId] || []).forEach(c => {
         const opt = document.createElement('option');
@@ -257,17 +277,31 @@ const LoginPage = {
         collegeSel.appendChild(opt);
       });
     }
-    const placeTypeSel = document.getElementById('f-place-type');
-    if (placeTypeSel) placeTypeSel.value = '';
-    const placeSel = document.getElementById('f-place');
-    if (placeSel) placeSel.innerHTML = '<option value="">Select Place</option>';
+
+    if (placeTypeSel) {
+      placeTypeSel.disabled = false;
+      placeTypeSel.value = '';
+    }
+    
+    if (placeSel) {
+      placeSel.innerHTML = '<option value="">Select Place Type First</option>';
+      placeSel.disabled = true;
+    }
   },
 
   onPlaceTypeChange() {
     const districtId = document.getElementById('f-district').value;
     const placeType = document.getElementById('f-place-type').value;
     const placeSel = document.getElementById('f-place');
-    if (!placeSel || !districtId || !placeType) return;
+    if (!placeSel) return;
+
+    if (!districtId || !placeType) {
+      placeSel.innerHTML = '<option value="">Select Place Type First</option>';
+      placeSel.disabled = true;
+      return;
+    }
+    
+    placeSel.disabled = false;
     placeSel.innerHTML = '<option value="">Select Place</option>';
     const places = (window.AP_GOV_PLACES[districtId] || {})[placeType] || [];
     places.forEach(p => {
