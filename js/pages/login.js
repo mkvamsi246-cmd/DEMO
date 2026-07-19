@@ -18,89 +18,125 @@ const LoginPage = {
           </div>
 
           <div class="login-card" id="login-card">
+            <div style="display:flex; justify-content:flex-end; margin-bottom:10px;">
+              <button class="btn btn-secondary btn-sm" onclick="LoginPage.toggleAdminCode()">
+                &#128272; Admin / Staff Access
+              </button>
+            </div>
             <div id="login-view">
-              <p style="font-size:0.82rem; color:var(--text-muted); text-align:center; margin-bottom:16px;">Select your category to get started</p>
+              
+              <div class="auth-tabs" id="auth-tabs" style="display:flex; margin-bottom:20px; border-bottom:1px solid rgba(255,255,255,0.1);">
+                 <button class="auth-tab active" id="tab-login" onclick="LoginPage.switchTab('login')" style="flex:1; background:none; border:none; color:var(--text-primary); padding:10px; font-weight:bold; cursor:pointer; border-bottom:2px solid var(--blue-pale);">Login</button>
+                 <button class="auth-tab" id="tab-register" onclick="LoginPage.switchTab('register')" style="flex:1; background:none; border:none; color:var(--text-muted); padding:10px; font-weight:bold; cursor:pointer; border-bottom:2px solid transparent;">Register</button>
+              </div>
 
-              <!-- Main 2-category selector -->
-              <div class="category-selector" id="category-selector">
-                <button class="category-btn" id="cat-student" onclick="LoginPage.selectCategory('student')">
-                  <span class="category-icon">&#127891;</span>
-                  <span class="category-name">Student</span>
-                  <span class="category-desc">School / College students</span>
-                </button>
-                <button class="category-btn" id="cat-citizen" onclick="LoginPage.selectCategory('citizen')">
-                  <span class="category-icon">&#127960;&#65039;</span>
-                  <span class="category-name">Citizen</span>
-                  <span class="category-desc">General public / Community</span>
+              <!-- Login Area -->
+              <div id="login-area">
+                <div class="form-group">
+                  <label class="form-label">Username</label>
+                  <input id="l-username" class="form-input" placeholder="Enter your username" type="text" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Password</label>
+                  <input id="l-password" class="form-input" placeholder="Enter your password" type="password" />
+                </div>
+                <button class="btn btn-primary btn-lg btn-full" onclick="LoginPage.doUserLogin()">
+                  &#128640; Login
                 </button>
               </div>
 
-              <!-- Regular user form (student / citizen) -->
-              <div id="login-form-area" class="hidden">
-                <div class="login-divider">Fill your details</div>
-                <div class="login-form" id="login-form">
-                  <div class="form-group">
-                    <label class="form-label">Full Name</label>
-                    <input id="f-name" class="form-input" placeholder="Enter your full name" type="text" />
-                  </div>
-                  <div class="form-group">
-                    <label class="form-label">Age Group</label>
-                    <select id="f-age" class="form-select">
-                      <option value="">Select Age Group</option>
-                      <option>Below 18</option>
-                      <option>18-25</option>
-                      <option>26-35</option>
-                      <option>36-50</option>
-                      <option>51-60</option>
-                      <option>Above 60</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label class="form-label">Preferred Language</label>
-                    <select id="f-lang" class="form-select">
-                      <option value="">Select Language</option>
-                      <option>Telugu</option>
-                      <option>English</option>
-                      <option>Hindi</option>
-                      <option>Urdu</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label class="form-label">District</label>
-                    <select id="f-district" class="form-select" onchange="LoginPage.onDistrictChange()">
-                      <option value="">Select District</option>
-                    </select>
-                  </div>
-                  <div id="student-fields" class="hidden">
-                    <div class="form-group">
-                      <label class="form-label">College / Institution</label>
-                      <select id="f-college" class="form-select">
-                        <option value="">Select College</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div id="citizen-fields" class="hidden">
-                    <div class="form-group">
-                      <label class="form-label">Place Type</label>
-                      <select id="f-place-type" class="form-select" onchange="LoginPage.onPlaceTypeChange()">
-                        <option value="">Select Place Type</option>
-                        <option value="panchayat">Gram Panchayat</option>
-                        <option value="police">Police Station</option>
-                        <option value="bank">Bank Branch</option>
-                        <option value="hospital">Government Hospital / PHC</option>
-                        <option value="csc">Common Service Centre (CSC)</option>
-                      </select>
-                    </div>
-                    <div class="form-group">
-                      <label class="form-label">Nearby Place</label>
-                      <select id="f-place" class="form-select">
-                        <option value="">Select Place</option>
-                      </select>
-                    </div>
-                  </div>
-                  <button class="btn btn-primary btn-lg btn-full" onclick="LoginPage.doLogin()">
-                    &#128640; Enter Platform
+              <!-- Register Area -->
+              <div id="register-area" class="hidden">
+                <p style="font-size:0.82rem; color:var(--text-muted); text-align:center; margin-bottom:16px;">Select your category to get started</p>
+                <!-- Main 2-category selector -->
+                <div class="category-selector" id="category-selector">
+                  <button class="category-btn" id="cat-student" onclick="LoginPage.selectCategory('student')">
+                    <span class="category-icon">&#127891;</span>
+                    <span class="category-name">Student</span>
+                    <span class="category-desc">School / College students</span>
                   </button>
+                  <button class="category-btn" id="cat-citizen" onclick="LoginPage.selectCategory('citizen')">
+                    <span class="category-icon">&#127960;&#65039;</span>
+                    <span class="category-name">Citizen</span>
+                    <span class="category-desc">General public / Community</span>
+                  </button>
+                </div>
+
+                <!-- Regular user form (student / citizen) -->
+                <div id="login-form-area" class="hidden">
+                  <div class="login-divider">Fill your details</div>
+                  <div class="login-form" id="login-form">
+                    <div class="form-group">
+                      <label class="form-label">Username</label>
+                      <input id="f-username" class="form-input" placeholder="Choose a username" type="text" />
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Password</label>
+                      <input id="f-password" class="form-input" placeholder="Choose a password" type="password" />
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Full Name</label>
+                      <input id="f-name" class="form-input" placeholder="Enter your full name" type="text" />
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Age Group</label>
+                      <select id="f-age" class="form-select">
+                        <option value="">Select Age Group</option>
+                        <option>Below 18</option>
+                        <option>18-25</option>
+                        <option>26-35</option>
+                        <option>36-50</option>
+                        <option>51-60</option>
+                        <option>Above 60</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Preferred Language</label>
+                      <select id="f-lang" class="form-select">
+                        <option value="">Select Language</option>
+                        <option>Telugu</option>
+                        <option>English</option>
+                        <option>Hindi</option>
+                        <option>Urdu</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">District</label>
+                      <select id="f-district" class="form-select" onchange="LoginPage.onDistrictChange()">
+                        <option value="">Select District</option>
+                      </select>
+                    </div>
+                    <div id="student-fields" class="hidden">
+                      <div class="form-group">
+                        <label class="form-label">College / Institution</label>
+                        <select id="f-college" class="form-select">
+                          <option value="">Select College</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div id="citizen-fields" class="hidden">
+                      <div class="form-group">
+                        <label class="form-label">Place Type</label>
+                        <select id="f-place-type" class="form-select" onchange="LoginPage.onPlaceTypeChange()">
+                          <option value="">Select Place Type</option>
+                          <option value="panchayat">Gram Panchayat</option>
+                          <option value="police">Police Station</option>
+                          <option value="bank">Bank Branch</option>
+                          <option value="hospital">Government Hospital / PHC</option>
+                          <option value="csc">Common Service Centre (CSC)</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label class="form-label">Nearby Place</label>
+                        <select id="f-place" class="form-select">
+                          <option value="">Select Place</option>
+                        </select>
+                      </div>
+                    </div>
+                    <button class="btn btn-primary btn-lg btn-full" onclick="LoginPage.doRegister()">
+                      &#128640; Register & Enter
+                    </button>
+                  </div>
                 </div>
               </div>
 
@@ -127,8 +163,7 @@ const LoginPage = {
               </div>
 
               <div class="login-footer">
-                <p>Admin / Volunteer? <a href="#" onclick="LoginPage.toggleAdminCode(); return false;">Click here</a></p>
-                <p style="margin-top:8px;">&#128274; Your data stays on your device. No account needed.</p>
+                <p style="margin-top:8px;">&#128274; Your data stays on your device.</p>
               </div>
             </div>
           </div>
@@ -160,27 +195,42 @@ const LoginPage = {
     }
   },
 
+  switchTab(tab) {
+    document.getElementById('tab-login').style.color = (tab === 'login') ? 'var(--text-primary)' : 'var(--text-muted)';
+    document.getElementById('tab-login').style.borderBottom = (tab === 'login') ? '2px solid var(--blue-pale)' : '2px solid transparent';
+    document.getElementById('tab-register').style.color = (tab === 'register') ? 'var(--text-primary)' : 'var(--text-muted)';
+    document.getElementById('tab-register').style.borderBottom = (tab === 'register') ? '2px solid var(--blue-pale)' : '2px solid transparent';
+    
+    document.getElementById('login-area').classList.toggle('hidden', tab !== 'login');
+    document.getElementById('register-area').classList.toggle('hidden', tab !== 'register');
+    document.getElementById('admin-code-area').classList.add('hidden');
+    document.getElementById('auth-tabs').classList.remove('hidden');
+  },
+
   selectCategory(cat) {
     this.selectedCategory = cat;
     document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
     document.getElementById('cat-' + cat).classList.add('active');
     document.getElementById('login-form-area').classList.remove('hidden');
-    document.getElementById('admin-code-area').classList.add('hidden');
-    document.getElementById('student-fields').classList.toggle('hidden', cat !== 'student');
-    document.getElementById('citizen-fields').classList.toggle('hidden', cat !== 'citizen');
   },
 
   toggleAdminCode() {
     const adminArea = document.getElementById('admin-code-area');
-    const formArea = document.getElementById('login-form-area');
+    const loginArea = document.getElementById('login-area');
+    const registerArea = document.getElementById('register-area');
+    const authTabs = document.getElementById('auth-tabs');
+    
     const isHidden = adminArea.classList.contains('hidden');
     if (isHidden) {
       adminArea.classList.remove('hidden');
-      formArea.classList.add('hidden');
-      document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-      this.selectedCategory = null;
+      loginArea.classList.add('hidden');
+      registerArea.classList.add('hidden');
+      authTabs.classList.add('hidden');
     } else {
       adminArea.classList.add('hidden');
+      authTabs.classList.remove('hidden');
+      // Default to login tab when closing admin
+      this.switchTab('login');
     }
   },
 
@@ -216,6 +266,44 @@ const LoginPage = {
       opt.textContent = p;
       placeSel.appendChild(opt);
     });
+  },
+
+  getRegisteredUsers() {
+    try {
+      return JSON.parse(localStorage.getItem('dss_registered_users')) || [];
+    } catch {
+      return [];
+    }
+  },
+
+  setRegisteredUsers(users) {
+    localStorage.setItem('dss_registered_users', JSON.stringify(users));
+  },
+
+  doUserLogin() {
+    const username = document.getElementById('l-username').value.trim();
+    const password = document.getElementById('l-password').value;
+
+    if (!username || !password) {
+      Helpers.toast('Please enter username and password', 'error');
+      return;
+    }
+
+    const users = this.getRegisteredUsers();
+    const user = users.find(u => u.username === username && u.password === password);
+
+    if (user) {
+      // Create session info without password
+      const sessionUser = { ...user };
+      delete sessionUser.password;
+      sessionUser.loginTime = new Date().toISOString();
+      
+      Helpers.setUser(sessionUser);
+      Helpers.toast('Welcome back, ' + user.name + '!', 'success');
+      App.navigate('dashboard');
+    } else {
+      Helpers.toast('Invalid username or password', 'error');
+    }
   },
 
   // Staff login: Admin uses ADMIN2024; Volunteers use code issued by Admin
@@ -273,8 +361,10 @@ const LoginPage = {
     Helpers.toast('Invalid access code. Contact your Admin for credentials.', 'error');
   },
 
-  // Regular student/citizen login
-  doLogin() {
+  // Regular student/citizen registration
+  doRegister() {
+    const username = document.getElementById('f-username').value.trim();
+    const password = document.getElementById('f-password').value;
     const name = document.getElementById('f-name').value.trim();
     const age = document.getElementById('f-age').value;
     const lang = document.getElementById('f-lang').value;
@@ -282,9 +372,17 @@ const LoginPage = {
     const cat = this.selectedCategory;
 
     if (!cat) { Helpers.toast('Please select Student or Citizen', 'error'); return; }
+    if (!username) { Helpers.toast('Please enter a username', 'error'); return; }
+    if (!password) { Helpers.toast('Please enter a password', 'error'); return; }
     if (!name) { Helpers.toast('Please enter your name', 'error'); return; }
     if (!age) { Helpers.toast('Please select your age group', 'error'); return; }
     if (!districtId) { Helpers.toast('Please select your district', 'error'); return; }
+
+    const users = this.getRegisteredUsers();
+    if (users.find(u => u.username === username)) {
+      Helpers.toast('Username already exists. Please choose another.', 'error');
+      return;
+    }
 
     const district = window.AP_DISTRICTS.find(function(d) { return d.id === districtId; });
     var extraFields = {};
@@ -301,7 +399,9 @@ const LoginPage = {
       extraFields.place = place;
     }
 
-    const user = Object.assign({
+    const newUser = Object.assign({
+      username: username,
+      password: password,
       name: name,
       age: age,
       language: lang || 'English',
@@ -309,11 +409,18 @@ const LoginPage = {
       districtName: district ? district.name : districtId,
       category: cat,
       role: cat,
-      loginTime: new Date().toISOString()
+      registrationTime: new Date().toISOString()
     }, extraFields);
 
-    Helpers.setUser(user);
-    Helpers.toast('Welcome, ' + name + '!', 'success');
+    users.push(newUser);
+    this.setRegisteredUsers(users);
+
+    const sessionUser = { ...newUser };
+    delete sessionUser.password;
+    sessionUser.loginTime = new Date().toISOString();
+
+    Helpers.setUser(sessionUser);
+    Helpers.toast('Registration successful! Welcome, ' + name + '!', 'success');
     App.navigate('dashboard');
   }
 };
